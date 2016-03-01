@@ -28,13 +28,13 @@ const Game = React.createClass({
   addPointToPlayerOne: function() {
     this.setState({
       playerOneScore: this.state.playerOneScore + 1
-    )};
+    });
   },
 
   addPointToPlayerTwo: function() {
     this.setState({
       playerTwoScore: this.state.playerTwoScore + 1
-    )};
+    });
   },
 
   determineServiceTaker: function() {
@@ -49,7 +49,7 @@ const Game = React.createClass({
 
   startNewGame: function() {
 
-  }
+  },
 
   render: function() {
     return (
