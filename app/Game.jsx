@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from './components/Button/Button.jsx';
-import StartScreen from './components/StartScreen/StartScreen.jsx';
+import Button from './components/button/Button.jsx';
+import NavBar from './components/navBar/NavBar.jsx';
 
 const Game = React.createClass({
 
@@ -11,8 +11,7 @@ const Game = React.createClass({
       playerOneSets: 0,
       playerTwoSets: 0,
       totalScore: 0,
-      serviceTaker: 1,
-      startScreenActive: false,
+      serviceTaker: 1
     };
   },
 
@@ -55,22 +54,13 @@ const Game = React.createClass({
     });
   },
 
-  closeNewGameScreen: function() {
-    this.setState({
-      startScreenActive: false
-    });
-  },
-
   render: function() {
     return (
       <div>
+        <NavBar />
         {this.state.playerOneScore}
         <Button valueButton="+1 player one" onClick={this.increaseScore}/>
-
         <Button valueButton="start a new game" onClick={this.startNewGame}/>
-
-        {this.state.startScreenActive ? <StartScreen /> : null}
-
       </div>
     )
   }

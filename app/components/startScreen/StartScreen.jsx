@@ -1,11 +1,13 @@
 import React from 'react';
+import Player from '../player/Player.jsx';
 
 const startScreen = React.createClass({
 
   render: function() {
     return (
       <div>
-        startscreen
+        <label>Player 1) </label><Player />
+        <label>Player 2) </label><Player />
       </div>
     );
   }
