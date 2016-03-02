@@ -7,7 +7,7 @@ const gulp = require('gulp'),
 
 const config = {
   js: {
-    src: './app/main.jsx',
+    src: './app/app.js',
     watch: './app/**/*',
     outputDir: './build/',
     outputFile: 'build.js',

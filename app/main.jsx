@@ -1,14 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory} from 'react-router';
+import {handleHistory} from 'fluxible-router';
+import provideContext from 'fluxible-addons-react/provideContext';
 
-import Game from './Game.jsx';
-import StartScreen from './components/startScreen/StartScreen.jsx';
+let Main = React.createClass({
+  propTypes: {
+    currentRoute: React.PropTypes.object,
+    context: React.PropTypes.object.isRequired,
+  },
 
+  contextTypes: {
+    getStore: React.PropTypes.func.isRequired,
+    executeAction: React.PropTypes.func.isRequired
+  },
 
-ReactDOM.render((
-  <Router history={hashHistory}>
-    <Route path="/" component={Game}/>
-    <Route path="/start" component={StartScreen}/>
-  </Router>
-), document.getElementById('table-tennis'));
+  childContextTypes: {
+    routeName: React.PropTypes.string
+  },
+
+  render: function() {
+    console.log("props", this.props);
+    console.log("children", this.props.children);
+    console.log("context", this.context);
+    const Handler = this.props.currentRoute.get('handler');
+
+    // const Handler = this.props.currentRoute.get('handler');
+    // const params = this.props.currentRoute.get('params').toJS();
+    return (
+      <div className="wrapper">
+        <Handler />
+      </div>
+    );
+  }
+});
+
+Main = handleHistory(Main);
+Main = provideContext(Main);
+
+export default Main;
