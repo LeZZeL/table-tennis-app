@@ -2,33 +2,65 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {handleHistory} from 'fluxible-router';
 import provideContext from 'fluxible-addons-react/provideContext';
+import Game from './Game.jsx';
+import Button from './components/button/Button.jsx';
 
 let Main = React.createClass({
   propTypes: {
-    currentRoute: React.PropTypes.object,
     context: React.PropTypes.object.isRequired,
   },
 
-  contextTypes: {
-    getStore: React.PropTypes.func.isRequired,
-    executeAction: React.PropTypes.func.isRequired
+  getInitialState: function() {
+    return {chosenPage: 'Home'};
+
   },
 
-  childContextTypes: {
-    routeName: React.PropTypes.string
+  startGame: function(string) {
+    this.setState({
+      chosenPage: 'Game'
+    })
+  },
+
+  viewStandings: function(string) {
+    this.setState({
+      chosenPage: 'Standings'
+    })
+  },
+
+  viewMatches: function(string) {
+    this.setState({
+      chosenPage: 'Matches'
+    })
+  },
+
+  renderChosenPage: function() {
+    if (this.state && this.state.chosenPage === 'Home') {
+      return (
+        <div>Hi</div>
+      );
+    } else if (this.state.chosenPage === 'Game') {
+      return (
+        <div><Game /></div>
+      );
+    } else if (this.state.chosenPage === 'Standings') {
+      return (
+        <div>Standings</div>
+      );
+    } else if (this.state.chosenPage === 'Matches') {
+      return (
+        <div>Matches</div>
+      );
+    }
   },
 
   render: function() {
-    console.log("props", this.props);
-    console.log("children", this.props.children);
-    console.log("context", this.context);
-    const Handler = this.props.currentRoute.get('handler');
-
-    // const Handler = this.props.currentRoute.get('handler');
-    // const params = this.props.currentRoute.get('params').toJS();
+    console.log(this.state);
     return (
-      <div className="wrapper">
-        <Handler />
+      <div className="full-page">
+        <Button valueButton="Start Game" onClick={this.startGame}/>
+        <Button valueButton="View Matches" onClick={this.viewMatches}/>
+        <Button valueButton="View Standings" onClick={this.viewStandings}/>
+        {this.renderChosenPage()}
       </div>
     );
   }
